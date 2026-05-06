@@ -1,0 +1,218 @@
+.hero {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #2d2b55 100%);
+  color: white;
+  padding: 100px 0 120px;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 52px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.heroSubtitle {
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.heroBtn {
+  font-size: 17px;
+}
+
+/* Features */
+.features {
+  margin-top: -60px;
+  padding-top: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.featGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.featCard {
+  background: white;
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.2s;
+}
+
+.featCard:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.featIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--bg-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--accent-blue);
+}
+
+.featCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.featCard p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.featLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-blue);
+}
+
+/* Types */
+.types {
+  padding: 80px 0;
+  background: var(--bg-gray);
+}
+
+.typesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.typeCard {
+  background: white;
+  border-radius: var(--radius);
+  padding: 40px 24px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+  color: var(--text-primary);
+}
+
+.typeCard:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-blue);
+}
+
+.typeCard svg {
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+}
+
+.typeCard h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.typeCard span {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Properties Grid */
+.propGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.propCard {
+  cursor: pointer;
+}
+
+.propImage {
+  height: 200px;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+.propType {
+  background: var(--primary-dark);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.propBody {
+  padding: 20px;
+}
+
+.propTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.propAddress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.propMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.propPrice {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.propMore {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Stats */
+.stats {
+  background: var(--primary-dark);
+  color: white;
+  padding: 80px 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.statNum {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+}
