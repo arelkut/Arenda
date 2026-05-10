@@ -1,39 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-*.egg
-.venv/
-venv/
-env/
-.env
-
-# Node
-node_modules/
-dist/
-.vite/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Build
+```
+# Android build artifacts
 build/
-*.log
+.gradle/
+*.apk
+*.aar
+*.dex
 
-# .NET / WPF
-bin/
-obj/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-packages/
-*.nupkg
+# Android studio
+.idea/
+*.iml
+*.iws
+out/
+
+# Compressed archives
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+```
