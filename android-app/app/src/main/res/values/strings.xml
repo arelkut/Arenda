@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Недвижимость.РФ</string>
+    <string name="login">Вход</string>
+    <string name="register">Регистрация</string>
+    <string name="catalog">Каталог</string>
+    <string name="favorites">Избранное</string>
+    <string name="profile">Профиль</string>
+    <string name="notifications">Уведомления</string>
+    <string name="logout">Выйти</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="name">Имя</string>
+    <string name="phone">Телефон</string>
+    <string name="search">Поиск</string>
+    <string name="price">Цена</string>
+    <string name="address">Адрес</string>
+    <string name="description">Описание</string>
+    <string name="no_internet">Нет подключения к интернету</string>
+    <string name="loading">Загрузка...</string>
+    <string name="error">Ошибка</string>
+    <string name="success">Успешно</string>
+    <string name="no_favorites">Нет избранных объектов</string>
+    <string name="no_properties">Объекты не найдены</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="remove_from_favorites">Удалить из избранного</string>
+    <string name="contact_agent">Связаться с агентом</string>
+    <string name="mortgage_calc">Ипотечный калькулятор</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="dont_have_account">Нет аккаунта?</string>
+    <string name="have_account">Есть аккаунт?</string>
+</resources>

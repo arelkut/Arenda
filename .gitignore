@@ -1,39 +1,40 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.eggs/
-*.egg
-.venv/
-venv/
-env/
+```
+# Compressed archives
+*.zip
+*.tar.gz
+
+# Environment variables
 .env
+.env.local
+*.env.*
 
-# Node
-node_modules/
-dist/
-.vite/
-
-# IDE
+# IDE and editor files
 .vscode/
 .idea/
 *.swp
 *.swo
+*.tmp
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Build
-build/
+# Logs
 *.log
 
-# .NET / WPF
-bin/
-obj/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-packages/
-*.nupkg
+# Build artifacts
+build/
+dist/
+target/
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
+# System files
+.DS_Store
+Thumbs.db
+```
