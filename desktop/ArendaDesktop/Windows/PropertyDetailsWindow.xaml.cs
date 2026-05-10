@@ -12,11 +12,33 @@ namespace ArendaDesktop.Windows
     {
         private readonly int _propertyId;
 
+        private static readonly string[] StaticImages = new string[]
+        {
+            "pack://application:,,,/Images/property1.jpg",
+            "pack://application:,,,/Images/property2.jpg",
+            "pack://application:,,,/Images/property3.jpg",
+            "pack://application:,,,/Images/property4.jpg",
+            "pack://application:,,,/Images/property5.jpg",
+            "pack://application:,,,/Images/property6.jpg"
+        };
+
         public PropertyDetailsWindow(int propertyId)
         {
             InitializeComponent();
             _propertyId = propertyId;
             LoadProperty();
+        }
+
+        private static BitmapImage GetStaticImage(int id)
+        {
+            var index = Math.Abs(id) % StaticImages.Length;
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.UriSource = new Uri(StaticImages[index], UriKind.Absolute);
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
         }
 
         private void LoadProperty()
@@ -25,7 +47,6 @@ namespace ArendaDesktop.Windows
             {
                 var prop = ApiService.GetProperty(_propertyId);
                 DisplayProperty(prop);
-
             }
             catch (Exception ex)
             {
@@ -42,27 +63,18 @@ namespace ArendaDesktop.Windows
                 (string.IsNullOrEmpty(prop.District) ? "" : $" (р-н {prop.District})");
             PriceText.Text = prop.PriceFormatted;
 
-            // Main photo
-            if (!string.IsNullOrEmpty(prop.MainPhotoUrl))
+            // Main photo (static)
+            try
             {
-                try
-                {
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(prop.MainPhotoUrl, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.EndInit();
-                    MainPhotoImage.Source = bmp;
-                }
-                catch { }
+                MainPhotoImage.Source = GetStaticImage(prop.PropertyId);
             }
+            catch { }
 
-            // Thumbnails
+            // Thumbnails (static — different images for variety)
             if (prop.Media != null && prop.Media.Count > 1)
             {
-                foreach (var media in prop.Media)
+                for (int i = 1; i < prop.Media.Count && i <= 4; i++)
                 {
-                    if (media.IsMain) continue;
                     try
                     {
                         var thumb = new Border
@@ -73,14 +85,11 @@ namespace ArendaDesktop.Windows
                             Margin = new Thickness(0, 0, 8, 0),
                             Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0))
                         };
-                        var img = new Image { Stretch = Stretch.UniformToFill };
-                        var bmp = new BitmapImage();
-                        bmp.BeginInit();
-                        var resolvedUrl = ApiService.ResolveImageUrl(media.FilePath);
-                        bmp.UriSource = new Uri(resolvedUrl, UriKind.Absolute);
-                        bmp.CacheOption = BitmapCacheOption.OnLoad;
-                        bmp.EndInit();
-                        img.Source = bmp;
+                        var img = new Image
+                        {
+                            Source = GetStaticImage(prop.PropertyId + i),
+                            Stretch = Stretch.UniformToFill
+                        };
                         thumb.Child = img;
                         ThumbnailsPanel.Children.Add(thumb);
                     }

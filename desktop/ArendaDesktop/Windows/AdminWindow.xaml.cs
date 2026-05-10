@@ -18,6 +18,29 @@ namespace ArendaDesktop.Windows
         private string _activeTab = "properties";
         private List<Property> _allProperties = new List<Property>();
 
+        private static readonly string[] StaticImages = new string[]
+        {
+            "pack://application:,,,/Images/property1.jpg",
+            "pack://application:,,,/Images/property2.jpg",
+            "pack://application:,,,/Images/property3.jpg",
+            "pack://application:,,,/Images/property4.jpg",
+            "pack://application:,,,/Images/property5.jpg",
+            "pack://application:,,,/Images/property6.jpg"
+        };
+
+        private static BitmapImage GetStaticImage(int id)
+        {
+            var index = Math.Abs(id) % StaticImages.Length;
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.UriSource = new Uri(StaticImages[index], UriKind.Absolute);
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.DecodePixelWidth = 72;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
+        }
+
         public AdminWindow()
         {
             InitializeComponent();
@@ -123,22 +146,13 @@ namespace ArendaDesktop.Windows
                 ClipToBounds = true, Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0)),
                 VerticalAlignment = VerticalAlignment.Center
             };
-            if (!string.IsNullOrEmpty(prop.MainPhotoUrl))
+            try
             {
-                try
-                {
-                    var img = new Image { Stretch = Stretch.UniformToFill };
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(prop.MainPhotoUrl, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.DecodePixelWidth = 72;
-                    bmp.EndInit();
-                    img.Source = bmp;
-                    thumbBorder.Child = img;
-                }
-                catch { }
+                var img = new Image { Stretch = Stretch.UniformToFill };
+                img.Source = GetStaticImage(prop.PropertyId);
+                thumbBorder.Child = img;
             }
+            catch { }
             Grid.SetColumn(thumbBorder, 0);
             grid.Children.Add(thumbBorder);
 

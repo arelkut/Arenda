@@ -17,6 +17,16 @@ namespace ArendaDesktop.Windows
         private int _totalPages = 1;
         private int _total = 0;
 
+        private static readonly string[] StaticImages = new string[]
+        {
+            "pack://application:,,,/Images/property1.jpg",
+            "pack://application:,,,/Images/property2.jpg",
+            "pack://application:,,,/Images/property3.jpg",
+            "pack://application:,,,/Images/property4.jpg",
+            "pack://application:,,,/Images/property5.jpg",
+            "pack://application:,,,/Images/property6.jpg"
+        };
+
         public MainCatalogWindow()
         {
             InitializeComponent();
@@ -35,6 +45,19 @@ namespace ArendaDesktop.Windows
             {
                 AdminButton.Visibility = Visibility.Visible;
             }
+        }
+
+        private static BitmapImage GetStaticImage(int propertyId)
+        {
+            var index = Math.Abs(propertyId) % StaticImages.Length;
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.UriSource = new Uri(StaticImages[index], UriKind.Absolute);
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.DecodePixelWidth = 400;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
         }
 
         private void LoadProperties()
@@ -107,7 +130,10 @@ namespace ArendaDesktop.Windows
                 Cursor = Cursors.Hand,
                 Effect = new DropShadowEffect
                 {
-                    BlurRadius = 8, ShadowDepth = 1, Opacity = 0.06, Color = Colors.Black
+                    BlurRadius = 8,
+                    ShadowDepth = 1,
+                    Opacity = 0.06,
+                    Color = Colors.Black
                 },
                 Tag = prop.PropertyId
             };
@@ -122,34 +148,30 @@ namespace ArendaDesktop.Windows
                 ClipToBounds = true,
                 Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0))
             };
+
             var photoGrid = new Grid();
-            photoGrid.Children.Add(new TextBlock
+            try
             {
-                Text = "Нет фото",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Foreground = (Brush)FindResource("TextSecondaryBrush"),
-                FontSize = 14
-            });
-            if (!string.IsNullOrEmpty(prop.MainPhotoUrl))
-            {
-                try
+                var img = new Image
                 {
-                    var img = new Image
-                    {
-                        Stretch = Stretch.UniformToFill,
-                        VerticalAlignment = VerticalAlignment.Center
-                    };
-                    var bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.UriSource = new Uri(prop.MainPhotoUrl, UriKind.Absolute);
-                    bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.EndInit();
-                    img.Source = bmp;
-                    photoGrid.Children.Add(img);
-                }
-                catch { }
+                    Source = GetStaticImage(prop.PropertyId),
+                    Stretch = Stretch.UniformToFill,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                photoGrid.Children.Add(img);
             }
+            catch
+            {
+                photoGrid.Children.Add(new TextBlock
+                {
+                    Text = "Нет фото",
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Foreground = (Brush)FindResource("TextSecondaryBrush"),
+                    FontSize = 14
+                });
+            }
+
             photoBorder.Child = photoGrid;
             stack.Children.Add(photoBorder);
 
@@ -164,9 +186,13 @@ namespace ArendaDesktop.Windows
                 TextTrimming = TextTrimming.CharacterEllipsis
             });
 
+            var location = prop.City;
+            if (!string.IsNullOrEmpty(prop.District))
+                location += $", {prop.District}";
+
             info.Children.Add(new TextBlock
             {
-                Text = $"{prop.City}, {prop.District}",
+                Text = location,
                 FontSize = 13,
                 Foreground = (Brush)FindResource("TextSecondaryBrush"),
                 TextTrimming = TextTrimming.CharacterEllipsis,
@@ -218,6 +244,7 @@ namespace ArendaDesktop.Windows
             {
                 var details = new PropertyDetailsWindow(propertyId);
                 details.ShowDialog();
+                LoadProperties();
             }
         }
 
