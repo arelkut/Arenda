@@ -25,11 +25,12 @@ namespace ArendaDesktop.Windows
             {
                 var prop = ApiService.GetProperty(_propertyId);
                 DisplayProperty(prop);
-                LoadingText.Visibility = Visibility.Collapsed;
+
             }
             catch (Exception ex)
             {
-                LoadingText.Text = "Ошибка загрузки: " + ex.Message;
+                MessageBox.Show("Ошибка загрузки: " + ex.Message, "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -70,12 +71,13 @@ namespace ArendaDesktop.Windows
                             CornerRadius = new CornerRadius(8),
                             ClipToBounds = true,
                             Margin = new Thickness(0, 0, 8, 0),
-                            Background = new SolidColorBrush(Color.FromRgb(0xF1, 0xF5, 0xF9))
+                            Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0))
                         };
                         var img = new Image { Stretch = Stretch.UniformToFill };
                         var bmp = new BitmapImage();
                         bmp.BeginInit();
-                        bmp.UriSource = new Uri(media.FilePath, UriKind.Absolute);
+                        var resolvedUrl = ApiService.ResolveImageUrl(media.FilePath);
+                        bmp.UriSource = new Uri(resolvedUrl, UriKind.Absolute);
                         bmp.CacheOption = BitmapCacheOption.OnLoad;
                         bmp.EndInit();
                         img.Source = bmp;

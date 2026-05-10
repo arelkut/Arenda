@@ -67,7 +67,7 @@ namespace ArendaDesktop.Windows
             try
             {
                 SubmitButton.IsEnabled = false;
-                SubmitButton.Content = "Создание...";
+                SubmitButton.Content = "Публикация...";
 
                 ApiService.CreateProperty(data);
                 DialogResult = true;
@@ -80,7 +80,7 @@ namespace ArendaDesktop.Windows
             finally
             {
                 SubmitButton.IsEnabled = true;
-                SubmitButton.Content = "Создать объявление";
+                SubmitButton.Content = "Опубликовать объявление";
             }
         }
 

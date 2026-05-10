@@ -105,11 +105,13 @@ namespace ArendaDesktop.Models
             get
             {
                 if (Media == null || Media.Count == 0) return null;
+                string path = null;
                 foreach (var m in Media)
                 {
-                    if (m.IsMain) return m.FilePath;
+                    if (m.IsMain) { path = m.FilePath; break; }
                 }
-                return Media[0].FilePath;
+                if (path == null) path = Media[0].FilePath;
+                return Services.ApiService.ResolveImageUrl(path);
             }
         }
     }

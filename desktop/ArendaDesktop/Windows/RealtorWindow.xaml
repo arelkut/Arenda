@@ -13,24 +13,23 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Шапка -->
-        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}" Padding="24,14">
+        <!-- Шапка (белая как в Figma) -->
+        <Border Grid.Row="0" Background="White" Padding="24,14"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock Text="🏠" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0" />
                     <TextBlock Text="Недвижимость.РФ" FontSize="18" FontWeight="Bold"
-                               Foreground="White" VerticalAlignment="Center" />
+                               Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock x:Name="UserEmailText" FontSize="13" Foreground="#CBD5E1"
+                    <TextBlock x:Name="UserEmailText" FontSize="13"
+                               Foreground="{StaticResource TextSecondaryBrush}"
                                VerticalAlignment="Center" Margin="0,0,16,0" />
                     <Button Content="Каталог" Style="{StaticResource SecondaryButton}"
-                            Foreground="White" Background="Transparent"
-                            Padding="12,6" FontSize="13" Margin="0,0,8,0"
+                            Padding="16,8" FontSize="13" Margin="0,0,8,0"
                             Click="CatalogButton_Click" />
-                    <Button Content="Выход" Style="{StaticResource SecondaryButton}"
-                            Foreground="White" Background="Transparent"
-                            Padding="12,6" FontSize="13"
+                    <Button Content="Выйти" Style="{StaticResource PrimaryButton}"
+                            Padding="20,8"
                             Click="LogoutButton_Click" />
                 </StackPanel>
             </Grid>
@@ -39,7 +38,7 @@
         <!-- Заголовок и кнопка добавления -->
         <Border Grid.Row="1" Margin="24,20,24,0">
             <Grid>
-                <TextBlock Text="Мои объявления" FontSize="28" FontWeight="Bold"
+                <TextBlock Text="Мои объявления" FontSize="24" FontWeight="Bold"
                            Foreground="{StaticResource TextPrimaryBrush}"
                            VerticalAlignment="Center" />
                 <Button Content="+ Добавить объявление"

@@ -19,6 +19,23 @@ namespace ArendaDesktop.Services
             set => _baseUrl = value.TrimEnd('/');
         }
 
+        public static string ServerRoot
+        {
+            get
+            {
+                var uri = new Uri(_baseUrl);
+                return uri.GetLeftPart(UriPartial.Authority);
+            }
+        }
+
+        public static string ResolveImageUrl(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath)) return null;
+            if (filePath.StartsWith("http://") || filePath.StartsWith("https://"))
+                return filePath;
+            return ServerRoot + "/" + filePath.TrimStart('/');
+        }
+
         private static string Get(string path)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, _baseUrl + path);

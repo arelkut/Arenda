@@ -12,18 +12,15 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Шапка -->
-        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}" Padding="24,14">
+        <!-- Шапка (белая) -->
+        <Border Grid.Row="0" Background="White" Padding="24,14"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
             <Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock Text="🏠" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0" />
-                    <TextBlock Text="Недвижимость.РФ" FontSize="18" FontWeight="Bold"
-                               Foreground="White" VerticalAlignment="Center" />
-                </StackPanel>
+                <TextBlock Text="Недвижимость.РФ" FontSize="18" FontWeight="Bold"
+                           Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center" />
                 <Button Content="← Назад" HorizontalAlignment="Right"
                         Style="{StaticResource SecondaryButton}"
-                        Foreground="White" Background="Transparent"
-                        Padding="12,6" FontSize="13"
+                        Padding="16,8" FontSize="13"
                         Click="BackButton_Click" />
             </Grid>
         </Border>
@@ -39,7 +36,7 @@
 
                 <!-- Левая колонка — фото -->
                 <StackPanel Grid.Column="0">
-                    <Border x:Name="MainPhotoBorder" Background="#F1F5F9" CornerRadius="12"
+                    <Border x:Name="MainPhotoBorder" Background="#F0F0F0" CornerRadius="12"
                             Height="350" ClipToBounds="True">
                         <Grid>
                             <TextBlock Text="Нет фото" HorizontalAlignment="Center"
@@ -58,15 +55,12 @@
                                Foreground="{StaticResource TextPrimaryBrush}"
                                TextWrapping="Wrap" />
 
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock Text="📍 " FontSize="14" />
-                        <TextBlock x:Name="AddressText" FontSize="14"
-                                   Foreground="{StaticResource TextSecondaryBrush}"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
+                    <TextBlock x:Name="AddressText" FontSize="14"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               TextWrapping="Wrap" Margin="0,10,0,0" />
 
                     <TextBlock x:Name="PriceText" FontSize="28" FontWeight="Bold"
-                               Foreground="{StaticResource AccentBrush}" Margin="0,16,0,0" />
+                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,16,0,0" />
 
                     <!-- Характеристики -->
                     <Border Background="White" CornerRadius="12" Padding="20" Margin="0,20,0,0"
@@ -99,10 +93,5 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-
-        <!-- Загрузка -->
-        <TextBlock x:Name="LoadingText" Grid.Row="1" Text="Загрузка..."
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   FontSize="16" Foreground="{StaticResource TextSecondaryBrush}" />
     </Grid>
 </Window>

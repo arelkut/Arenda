@@ -27,9 +27,9 @@ namespace ArendaDesktop.Windows
         private void SetupHeader()
         {
             UserEmailText.Text = AuthHelper.Email ?? "";
-            if (AuthHelper.IsLandlord || AuthHelper.IsAdmin)
+            if (AuthHelper.IsLandlord)
             {
-                ProfileButton.Visibility = Visibility.Visible;
+                MyPropertiesButton.Visibility = Visibility.Visible;
             }
             if (AuthHelper.IsAdmin)
             {
@@ -48,30 +48,33 @@ namespace ArendaDesktop.Windows
                 var city = CityFilter.Text.Trim();
                 var typeItem = TypeFilter.SelectedItem as ComboBoxItem;
                 var type = typeItem?.Content?.ToString();
-                if (type == "Все") type = null;
+                if (type == "Все типы") type = null;
                 var roomsItem = RoomsFilter.SelectedItem as ComboBoxItem;
                 var roomsStr = roomsItem?.Content?.ToString();
                 int? rooms = null;
-                if (roomsStr != null && roomsStr != "Все")
+                if (roomsStr != null && roomsStr != "Любое")
                 {
                     if (int.TryParse(roomsStr.Replace("+", ""), out int r))
                         rooms = r;
                 }
+                double? minPrice = null;
+                if (double.TryParse(MinPriceFilter.Text.Trim(), out double mnp))
+                    minPrice = mnp;
                 double? maxPrice = null;
-                if (double.TryParse(MaxPriceFilter.Text.Trim(), out double mp))
-                    maxPrice = mp;
+                if (double.TryParse(MaxPriceFilter.Text.Trim(), out double mxp))
+                    maxPrice = mxp;
 
                 var result = ApiService.GetProperties(
                     _currentPage, 12,
                     string.IsNullOrEmpty(search) ? null : search,
                     string.IsNullOrEmpty(city) ? null : city,
-                    type, rooms, null, maxPrice
+                    type, rooms, minPrice, maxPrice
                 );
 
                 _total = result.Total;
                 _totalPages = Math.Max(1, (int)Math.Ceiling(_total / 12.0));
 
-                TotalText.Text = $"Найдено {_total} объявлений";
+                TotalText.Text = $"Найдено объектов: {_total}";
                 PageText.Text = $"Страница {_currentPage} из {_totalPages}";
                 PrevButton.IsEnabled = _currentPage > 1;
                 NextButton.IsEnabled = _currentPage < _totalPages;
@@ -100,11 +103,11 @@ namespace ArendaDesktop.Windows
                 Background = Brushes.White,
                 CornerRadius = new CornerRadius(12),
                 Margin = new Thickness(0, 0, 16, 16),
-                Width = 280,
+                Width = 270,
                 Cursor = Cursors.Hand,
                 Effect = new DropShadowEffect
                 {
-                    BlurRadius = 8, ShadowDepth = 1, Opacity = 0.08, Color = Colors.Black
+                    BlurRadius = 8, ShadowDepth = 1, Opacity = 0.06, Color = Colors.Black
                 },
                 Tag = prop.PropertyId
             };
@@ -112,13 +115,12 @@ namespace ArendaDesktop.Windows
 
             var stack = new StackPanel();
 
-            // Photo
             var photoBorder = new Border
             {
                 CornerRadius = new CornerRadius(12, 12, 0, 0),
                 Height = 180,
                 ClipToBounds = true,
-                Background = new SolidColorBrush(Color.FromRgb(0xF1, 0xF5, 0xF9))
+                Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0))
             };
             var photoGrid = new Grid();
             photoGrid.Children.Add(new TextBlock
@@ -151,7 +153,6 @@ namespace ArendaDesktop.Windows
             photoBorder.Child = photoGrid;
             stack.Children.Add(photoBorder);
 
-            // Info
             var info = new StackPanel { Margin = new Thickness(16, 12, 16, 16) };
 
             info.Children.Add(new TextBlock
@@ -163,19 +164,15 @@ namespace ArendaDesktop.Windows
                 TextTrimming = TextTrimming.CharacterEllipsis
             });
 
-            var location = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 6, 0, 0) };
-            location.Children.Add(new TextBlock { Text = "📍 ", FontSize = 12 });
-            location.Children.Add(new TextBlock
+            info.Children.Add(new TextBlock
             {
-                Text = $"{prop.City}, {prop.Address}",
+                Text = $"{prop.City}, {prop.District}",
                 FontSize = 13,
                 Foreground = (Brush)FindResource("TextSecondaryBrush"),
                 TextTrimming = TextTrimming.CharacterEllipsis,
-                MaxWidth = 220
+                Margin = new Thickness(0, 4, 0, 0)
             });
-            info.Children.Add(location);
 
-            // Tags
             var tags = new WrapPanel { Margin = new Thickness(0, 8, 0, 0) };
             tags.Children.Add(CreateTag(prop.AreaFormatted));
             if (prop.Rooms.HasValue)
@@ -187,9 +184,9 @@ namespace ArendaDesktop.Windows
             info.Children.Add(new TextBlock
             {
                 Text = prop.PriceFormatted,
-                FontSize = 18,
+                FontSize = 17,
                 FontWeight = FontWeights.Bold,
-                Foreground = (Brush)FindResource("AccentBrush"),
+                Foreground = (Brush)FindResource("TextPrimaryBrush"),
                 Margin = new Thickness(0, 10, 0, 0)
             });
 
@@ -202,15 +199,15 @@ namespace ArendaDesktop.Windows
         {
             return new Border
             {
-                Background = new SolidColorBrush(Color.FromRgb(0xEF, 0xF6, 0xFF)),
+                Background = new SolidColorBrush(Color.FromRgb(0xF0, 0xF0, 0xF0)),
                 CornerRadius = new CornerRadius(4),
-                Padding = new Thickness(6, 2, 6, 2),
+                Padding = new Thickness(8, 3, 8, 3),
                 Margin = new Thickness(0, 0, 6, 0),
                 Child = new TextBlock
                 {
                     Text = text,
                     FontSize = 12,
-                    Foreground = (Brush)FindResource("AccentBrush")
+                    Foreground = (Brush)FindResource("TextPrimaryBrush")
                 }
             };
         }
@@ -230,34 +227,19 @@ namespace ArendaDesktop.Windows
             LoadProperties();
         }
 
-        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                _currentPage = 1;
-                LoadProperties();
-            }
-        }
-
-        private void ToggleFilters_Click(object sender, RoutedEventArgs e)
-        {
-            FiltersPanel.Visibility = FiltersPanel.Visibility == Visibility.Visible
-                ? Visibility.Collapsed
-                : Visibility.Visible;
-        }
-
         private void ResetFilters_Click(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = "";
             CityFilter.Text = "";
             TypeFilter.SelectedIndex = 0;
             RoomsFilter.SelectedIndex = 0;
+            MinPriceFilter.Text = "";
             MaxPriceFilter.Text = "";
             _currentPage = 1;
             LoadProperties();
         }
 
-        private void PrevPage_Click(object sender, RoutedEventArgs e)
+        private void PrevButton_Click(object sender, RoutedEventArgs e)
         {
             if (_currentPage > 1)
             {
@@ -266,7 +248,7 @@ namespace ArendaDesktop.Windows
             }
         }
 
-        private void NextPage_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             if (_currentPage < _totalPages)
             {
@@ -275,7 +257,7 @@ namespace ArendaDesktop.Windows
             }
         }
 
-        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        private void MyPropertiesButton_Click(object sender, RoutedEventArgs e)
         {
             var realtor = new RealtorWindow();
             realtor.Show();
