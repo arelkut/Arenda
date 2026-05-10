@@ -1,0 +1,243 @@
+<Window x:Class="ArendaDesktop.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Недвижимость.РФ — Админ панель"
+        Width="1280" Height="800"
+        MinWidth="1000" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель (тёмная как в Figma) -->
+        <Border Grid.Column="0" Background="#1E1E2D">
+            <StackPanel>
+                <!-- Профиль админа -->
+                <StackPanel Margin="20,24,20,20">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="40" Height="40" CornerRadius="20" Background="#3B3B50">
+                            <TextBlock Text="A" Foreground="White" FontSize="18" FontWeight="Bold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock x:Name="AdminNameText" Text="Администратор"
+                                       Foreground="White" FontSize="14" FontWeight="SemiBold" />
+                            <Border Background="#16A34A" CornerRadius="4" Padding="8,2" Margin="0,4,0,0"
+                                    HorizontalAlignment="Left">
+                                <TextBlock Text="Админ" Foreground="White" FontSize="11" />
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Навигация на главную -->
+                <Button Content="← На главную" Foreground="#9CA3AF" Background="Transparent"
+                        BorderThickness="0" FontSize="13" Padding="20,10" Cursor="Hand"
+                        HorizontalContentAlignment="Left" Click="BackToMain_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Border Height="1" Background="#2D2D3F" Margin="20,8" />
+
+                <!-- Меню навигации -->
+                <Button x:Name="NavProperties" Content="  Управление объявлениями"
+                        Click="NavProperties_Click" Tag="properties"
+                        Foreground="White" Background="#2D2D3F" BorderThickness="0"
+                        FontSize="13" Padding="20,12" Cursor="Hand"
+                        HorizontalContentAlignment="Left">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bg" Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}" CornerRadius="8" Margin="12,2">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="NavUsers" Content="  Управление пользователями"
+                        Click="NavUsers_Click" Tag="users"
+                        Foreground="#9CA3AF" Background="Transparent" BorderThickness="0"
+                        FontSize="13" Padding="20,12" Cursor="Hand"
+                        HorizontalContentAlignment="Left">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bg" Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}" CornerRadius="8" Margin="12,2">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name="NavSettings" Content="  Настройки системы"
+                        Click="NavSettings_Click" Tag="settings"
+                        Foreground="#9CA3AF" Background="Transparent" BorderThickness="0"
+                        FontSize="13" Padding="20,12" Cursor="Hand"
+                        HorizontalContentAlignment="Left">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bg" Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}" CornerRadius="8" Margin="12,2">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Основной контент -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Сообщение -->
+            <Border x:Name="MessageBorder" Grid.Row="0" Margin="24,12,24,0"
+                    CornerRadius="8" Padding="12,8" Visibility="Collapsed">
+                <TextBlock x:Name="MessageText" FontSize="13" />
+            </Border>
+
+            <!-- Вкладка: Управление объявлениями -->
+            <ScrollViewer x:Name="PropertiesTab" Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                          Margin="24,16,24,24">
+                <StackPanel>
+                    <TextBlock Text="Управление объявлениями" FontSize="22" FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16" />
+
+                    <!-- Статистика -->
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Background="White" CornerRadius="12" Padding="20" Margin="0,0,8,0">
+                            <StackPanel>
+                                <TextBlock x:Name="TotalPropsText" Text="0" FontSize="28" FontWeight="Bold"
+                                           Foreground="{StaticResource TextPrimaryBrush}" />
+                                <TextBlock Text="Всего объявлений" FontSize="13"
+                                           Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Background="White" CornerRadius="12" Padding="20" Margin="8,0,8,0">
+                            <StackPanel>
+                                <TextBlock x:Name="PendingPropsText" Text="0" FontSize="28" FontWeight="Bold"
+                                           Foreground="#F59E0B" />
+                                <TextBlock Text="На модерации" FontSize="13"
+                                           Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Background="White" CornerRadius="12" Padding="20" Margin="8,0,0,0">
+                            <StackPanel>
+                                <TextBlock x:Name="ActivePropsText" Text="0" FontSize="28" FontWeight="Bold"
+                                           Foreground="#16A34A" />
+                                <TextBlock Text="Активные" FontSize="13"
+                                           Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <!-- Поиск -->
+                    <TextBox x:Name="PropsSearchBox" Style="{StaticResource ModernTextBox}"
+                             Height="38" Margin="0,0,0,16"
+                             TextChanged="PropsSearch_TextChanged" />
+
+                    <!-- Таблица объявлений -->
+                    <Border Background="White" CornerRadius="12" Padding="0">
+                        <StackPanel x:Name="PropertiesList" />
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Вкладка: Управление пользователями -->
+            <ScrollViewer x:Name="UsersTab" Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                          Margin="24,16,24,24" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Управление пользователями" FontSize="22" FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16" />
+
+                    <TextBox x:Name="UsersSearchBox" Style="{StaticResource ModernTextBox}"
+                             Height="38" Margin="0,0,0,16"
+                             TextChanged="UsersSearch_TextChanged" />
+
+                    <Border Background="White" CornerRadius="12" Padding="0">
+                        <StackPanel x:Name="UsersList" />
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Вкладка: Настройки системы -->
+            <ScrollViewer x:Name="SettingsTab" Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                          Margin="24,16,24,24" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="Настройки системы" FontSize="22" FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,24" />
+
+                    <!-- Основные настройки -->
+                    <Border Background="White" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Основные настройки" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16" />
+                            <TextBlock Text="Название платформы" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="PlatformNameBox" Style="{StaticResource ModernTextBox}"
+                                     Text="Недвижимость.РФ" Margin="0,0,0,12" />
+                            <TextBlock Text="Описание" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="PlatformDescBox" Style="{StaticResource ModernTextBox}"
+                                     Text="Платформа для аренды недвижимости" Margin="0,0,0,12"
+                                     Height="60" TextWrapping="Wrap" AcceptsReturn="True" />
+                            <TextBlock Text="Контактный email" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="ContactEmailBox" Style="{StaticResource ModernTextBox}"
+                                     Text="info@nedvizhimost.ru" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Настройки модерации -->
+                    <Border Background="White" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Настройки модерации" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16" />
+                            <CheckBox x:Name="AutoModerationCheck" Content="Автоматическая модерация объявлений"
+                                      FontSize="14" Margin="0,0,0,12" />
+                            <CheckBox x:Name="NotifyAdminCheck" Content="Уведомлять администратора о новых объявлениях"
+                                      FontSize="14" IsChecked="True" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Настройки безопасности -->
+                    <Border Background="White" CornerRadius="12" Padding="24" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Настройки безопасности" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,16" />
+                            <TextBlock Text="Минимальная длина пароля" Style="{StaticResource FieldLabel}" />
+                            <TextBox x:Name="MinPasswordBox" Style="{StaticResource ModernTextBox}"
+                                     Text="6" Width="100" HorizontalAlignment="Left" Margin="0,0,0,12" />
+                            <CheckBox x:Name="TwoFactorCheck" Content="Двухфакторная аутентификация"
+                                      FontSize="14" />
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="Сохранить настройки" Style="{StaticResource PrimaryButton}"
+                            Padding="24,12" HorizontalAlignment="Left"
+                            Click="SaveSettings_Click" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

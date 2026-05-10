@@ -27,3 +27,13 @@ Thumbs.db
 # Build
 build/
 *.log
+
+# .NET / WPF
+bin/
+obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+packages/
+*.nupkg
