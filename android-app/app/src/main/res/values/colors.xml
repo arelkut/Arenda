@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#4361ee</color>
-    <color name="primary_dark">#16213e</color>
-    <color name="primary_light">#4361ee</color>
-    <color name="accent">#4361ee</color>
-    
+    <!-- Основные цвета из веб-приложения -->
+    <color name="primary_dark">#1a1a2e</color>
+    <color name="primary_blue">#16213e</color>
+    <color name="accent_blue">#4361ee</color>
     <color name="text_primary">#1a1a2e</color>
     <color name="text_secondary">#6b7280</color>
-    <color name="text_hint">#9ca3af</color>
-    
-    <color name="background">#ffffff</color>
-    <color name="background_secondary">#f8f9fa</color>
-    <color name="surface">#ffffff</color>
-    
+    <color name="background_white">#ffffff</color>
+    <color name="background_light">#f8f9fa</color>
+    <color name="card_background">#ffffff</color>
     <color name="divider">#e5e7eb</color>
-    <color name="error">#ef4444</color>
     <color name="success">#10b981</color>
+    <color name="error">#ef4444</color>
     <color name="warning">#f59e0b</color>
     
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="transparent">#00000000</color>
+    <!-- Цвета для UI элементов -->
+    <color name="button_primary">#4361ee</color>
+    <color name="button_pressed">#304ffe</color>
+    <color name="input_background">#f3f4f6</color>
+    <color name="navigation_bar">#ffffff</color>
+    <color name="status_bar">#1a1a2e</color>
 </resources>

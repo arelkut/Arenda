@@ -1,76 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Base application theme -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
     <style name="Theme.NedvizhimostApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color -->
-        <item name="colorPrimary">#4361ee</item>
-        <item name="colorPrimaryVariant">#16213e</item>
-        <item name="colorOnPrimary">@android:color/white</item>
-        
-        <!-- Secondary brand color -->
-        <item name="colorSecondary">#4361ee</item>
-        <item name="colorSecondaryVariant">#1a1a2e</item>
-        <item name="colorOnSecondary">@android:color/white</item>
-        
-        <!-- Status bar color -->
-        <item name="android:statusBarColor">#16213e</item>
-        <item name="android:navigationBarColor">#16213e</item>
-        
-        <!-- Background color -->
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="backgroundColor">@android:color/white</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_blue</item>
+        <item name="colorOnPrimary">@color/background_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorSecondaryVariant">@color/primary_blue</item>
+        <item name="colorOnSecondary">@color/background_white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">@color/navigation_bar</item>
+        <!-- Background color. -->
+        <item name="android:windowBackground">@color/background_light</item>
     </style>
 
-    <!-- No ActionBar theme -->
-    <style name="Theme.NedvizhimostApp.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorPrimary">#4361ee</item>
-        <item name="colorPrimaryVariant">#16213e</item>
-        <item name="colorOnPrimary">@android:color/white</item>
-        <item name="android:statusBarColor">#16213e</item>
-    </style>
-
-    <!-- Splash theme -->
-    <style name="Theme.NedvizhimostApp.Splash" parent="Theme.NedvizhimostApp.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
-    </style>
-
-    <!-- Button style -->
+    <!-- Стиль для кнопок -->
     <style name="Button.Primary" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">#4361ee</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="backgroundTint">@color/button_primary</item>
+        <item name="android:textColor">@color/background_white</item>
         <item name="cornerRadius">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
 
-    <!-- Input field style -->
-    <style name="TextInputLayout.Style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">#4361ee</item>
-        <item name="hintTextColor">#4361ee</item>
+    <!-- Стиль для полей ввода -->
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">12dp</item>
         <item name="boxCornerRadiusTopEnd">12dp</item>
         <item name="boxCornerRadiusBottomStart">12dp</item>
         <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/accent_blue</item>
+        <item name="hintTextColor">@color/accent_blue</item>
     </style>
 
-    <!-- Card style -->
-    <style name="Card.Style" parent="Widget.MaterialComponents.CardView">
+    <!-- Стиль для карточек -->
+    <style name="CardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">12dp</item>
         <item name="cardElevation">4dp</item>
-        <item name="cardBackgroundColor">@android:color/white</item>
-    </style>
-
-    <!-- Text styles -->
-    <style name="Text.Title" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textColor">#1a1a2e</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="Text.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:textColor">#6b7280</item>
-    </style>
-
-    <style name="Text.Body" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textColor">#1a1a2e</item>
+        <item name="cardBackgroundColor">@color/card_background</item>
     </style>
 </resources>

@@ -1,81 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Недвижимость.РФ</string>
-    
-    <!-- Navigation -->
-    <string name="nav_catalog">Каталог</string>
-    <string name="nav_favorites">Избранное</string>
-    <string name="nav_profile">Профиль</string>
-    <string name="nav_notifications">Уведомления</string>
-    
-    <!-- Auth -->
-    <string name="login_title">Вход</string>
-    <string name="register_title">Регистрация</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Пароль</string>
-    <string name="name_hint">ФИО</string>
-    <string name="phone_hint">Телефон</string>
-    <string name="btn_login">Войти</string>
-    <string name="btn_register">Зарегистрироваться</string>
-    <string name="btn_forgot_password">Забыли пароль?</string>
-    <string name="no_account">Нет аккаунта?</string>
-    <string name="have_account">Есть аккаунт?</string>
+    <string name="login">Вход</string>
+    <string name="register">Регистрация</string>
+    <string name="catalog">Каталог</string>
+    <string name="favorites">Избранное</string>
+    <string name="profile">Профиль</string>
+    <string name="notifications">Уведомления</string>
     <string name="logout">Выйти</string>
-    
-    <!-- Catalog -->
-    <string name="catalog_title">Каталог недвижимости</string>
-    <string name="search_hint">Поиск недвижимости</string>
-    <string name="filter">Фильтр</string>
-    <string name="sort">Сортировка</string>
-    <string name="property_type">Тип недвижимости</string>
-    <string name="price_range">Цена</string>
-    <string name="rooms">Комнаты</string>
-    <string name="area">Площадь</string>
-    
-    <!-- Property Detail -->
-    <string name="property_description">Описание</string>
-    <string name="contact_agent">Связаться с агентом</string>
-    <string name="add_to_favorites">В избранное</string>
-    <string name="remove_from_favorites">Удалить из избранного</string>
-    <string name="call">Позвонить</string>
-    <string name="features">Характеристики</string>
-    
-    <!-- Profile -->
-    <string name="profile_title">Профиль</string>
-    <string name="profile_name">ФИО</string>
-    <string name="profile_email">Email</string>
-    <string name="profile_phone">Телефон</string>
-    <string name="edit_profile">Редактировать профиль</string>
-    <string name="my_favorites">Мои избранные</string>
-    <string name="settings">Настройки</string>
-    
-    <!-- Favorites -->
-    <string name="favorites_title">Избранное</string>
-    <string name="favorites_empty">Нет избранных объектов</string>
-    
-    <!-- Notifications -->
-    <string name="notifications_title">Уведомления</string>
-    <string name="notifications_empty">Нет новых уведомлений</string>
-    <string name="notification_new_property">Новый объект в каталоге</string>
-    <string name="notification_price_change">Изменение цены</string>
-    
-    <!-- Common -->
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="name">Имя</string>
+    <string name="phone">Телефон</string>
+    <string name="search">Поиск</string>
+    <string name="price">Цена</string>
+    <string name="address">Адрес</string>
+    <string name="description">Описание</string>
+    <string name="no_internet">Нет подключения к интернету</string>
     <string name="loading">Загрузка...</string>
     <string name="error">Ошибка</string>
-    <string name="retry">Повторить</string>
-    <string name="cancel">Отмена</string>
-    <string name="save">Сохранить</string>
-    <string name="delete">Удалить</string>
-    <string name="confirm">Подтвердить</string>
     <string name="success">Успешно</string>
-    
-    <!-- Property Types -->
-    <string name="type_apartment">Квартира</string>
-    <string name="type_house">Дом</string>
-    <string name="type_commercial">Коммерческая</string>
-    <string name="type_land">Участок</string>
-    
-    <!-- Currency -->
-    <string name="currency">₽</string>
-    <string name="currency_format">%1$s %2$s</string>
+    <string name="no_favorites">Нет избранных объектов</string>
+    <string name="no_properties">Объекты не найдены</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="remove_from_favorites">Удалить из избранного</string>
+    <string name="contact_agent">Связаться с агентом</string>
+    <string name="mortgage_calc">Ипотечный калькулятор</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="dont_have_account">Нет аккаунта?</string>
+    <string name="have_account">Есть аккаунт?</string>
 </resources>
