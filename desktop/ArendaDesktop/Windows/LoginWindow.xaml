@@ -10,8 +10,7 @@
         <!-- Карточка авторизации -->
         <Border Background="White" CornerRadius="16" Padding="40"
                 VerticalAlignment="Center" HorizontalAlignment="Center"
-                Width="400"
-                Effect="{StaticResource {x:Static SystemParameters.DropShadowEffectKey}}">
+                Width="400">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="2" Opacity="0.1" Color="Black" />
             </Border.Effect>
