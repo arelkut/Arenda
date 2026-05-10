@@ -1,41 +1,40 @@
 ```
-# Android build artifacts
-*.apk
-*.aar
-*.dex
-
-# Android generated files
-build/
-.gradle/
-local.properties
-.settings/
-
-# IDE files
-.idea/
-*.iml
-*.iws
-.vscode/
-
-# Log files
-*.log
-
-# Temp files
-*.tmp
-*~
-.DS_Store
-Thumbs.db
+# Compressed archives
+*.zip
+*.tar.gz
 
 # Environment variables
 .env
 .env.local
 *.env.*
 
-# Coverage reports
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+dist/
+target/
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.coverage
 coverage/
-*.coverage
 htmlcov/
 
-# Gradle
-.gradle/
-!gradle/wrapper/gradle-wrapper.properties
+# System files
+.DS_Store
+Thumbs.db
 ```
