@@ -1,0 +1,125 @@
+<Window x:Class="ArendaDesktop.Windows.AddPropertyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить объявление"
+        Width="600" Height="750"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="White" CornerRadius="16" Padding="32" Margin="24">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="16" ShadowDepth="2" Opacity="0.08" Color="Black" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Добавить объявление" FontSize="24" FontWeight="Bold"
+                           Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,4" />
+                <TextBlock Text="Заполните информацию об объекте недвижимости"
+                           FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,0,0,24" />
+
+                <!-- Ошибка -->
+                <Border x:Name="ErrorBorder" Background="#FEF2F2" CornerRadius="8"
+                        Padding="12,8" Margin="0,0,0,16" Visibility="Collapsed">
+                    <TextBlock x:Name="ErrorText" Foreground="#DC2626" FontSize="13"
+                               TextWrapping="Wrap" />
+                </Border>
+
+                <!-- Название -->
+                <TextBlock Text="Название *" Style="{StaticResource FieldLabel}" />
+                <TextBox x:Name="TitleBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,16" />
+
+                <!-- Описание -->
+                <TextBlock Text="Описание" Style="{StaticResource FieldLabel}" />
+                <TextBox x:Name="DescriptionBox" Style="{StaticResource ModernTextBox}"
+                         AcceptsReturn="True" TextWrapping="Wrap" Height="80"
+                         VerticalScrollBarVisibility="Auto" Margin="0,0,0,16" />
+
+                <!-- Город и район -->
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Город *" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="CityBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Район" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="DistrictBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Адрес -->
+                <TextBlock Text="Адрес *" Style="{StaticResource FieldLabel}" />
+                <TextBox x:Name="AddressBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,16" />
+
+                <!-- Тип и площадь -->
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Тип недвижимости *" Style="{StaticResource FieldLabel}" />
+                        <ComboBox x:Name="PropertyTypeBox" Style="{StaticResource ModernComboBox}">
+                            <ComboBoxItem Content="Квартира" IsSelected="True" />
+                            <ComboBoxItem Content="Студия" />
+                            <ComboBoxItem Content="Дом" />
+                            <ComboBoxItem Content="Коммерческая" />
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Площадь (м²) *" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="AreaBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Комнаты и этаж -->
+                <Grid Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Комнат" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="RoomsBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Этаж" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="FloorBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Всего этажей" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="TotalFloorsBox" Style="{StaticResource ModernTextBox}" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Цена -->
+                <TextBlock Text="Цена (₽/мес) *" Style="{StaticResource FieldLabel}" />
+                <TextBox x:Name="PriceBox" Style="{StaticResource ModernTextBox}" Margin="0,0,0,24" />
+
+                <!-- Кнопки -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Отмена" Grid.Column="0"
+                            Style="{StaticResource SecondaryButton}"
+                            Click="CancelButton_Click" HorizontalAlignment="Stretch" />
+                    <Button x:Name="SubmitButton" Content="Создать объявление" Grid.Column="2"
+                            Style="{StaticResource PrimaryButton}"
+                            Click="SubmitButton_Click" HorizontalAlignment="Stretch" />
+                </Grid>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Window>

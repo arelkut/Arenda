@@ -1,0 +1,108 @@
+<Window x:Class="ArendaDesktop.Windows.PropertyDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детали объявления"
+        Width="900" Height="700"
+        MinWidth="700" MinHeight="500"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}" Padding="24,14">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="🏠" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBlock Text="Недвижимость.РФ" FontSize="18" FontWeight="Bold"
+                               Foreground="White" VerticalAlignment="Center" />
+                </StackPanel>
+                <Button Content="← Назад" HorizontalAlignment="Right"
+                        Style="{StaticResource SecondaryButton}"
+                        Foreground="White" Background="Transparent"
+                        Padding="12,6" FontSize="13"
+                        Click="BackButton_Click" />
+            </Grid>
+        </Border>
+
+        <!-- Контент -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24">
+            <Grid x:Name="ContentGrid" Margin="24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*" />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Левая колонка — фото -->
+                <StackPanel Grid.Column="0">
+                    <Border x:Name="MainPhotoBorder" Background="#F1F5F9" CornerRadius="12"
+                            Height="350" ClipToBounds="True">
+                        <Grid>
+                            <TextBlock Text="Нет фото" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{StaticResource TextSecondaryBrush}" FontSize="16" />
+                            <Image x:Name="MainPhotoImage" Stretch="UniformToFill"
+                                   VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <WrapPanel x:Name="ThumbnailsPanel" Margin="0,12,0,0" />
+                </StackPanel>
+
+                <!-- Правая колонка — информация -->
+                <StackPanel Grid.Column="2">
+                    <TextBlock x:Name="TitleText" FontSize="24" FontWeight="Bold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               TextWrapping="Wrap" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="📍 " FontSize="14" />
+                        <TextBlock x:Name="AddressText" FontSize="14"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <TextBlock x:Name="PriceText" FontSize="28" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,16,0,0" />
+
+                    <!-- Характеристики -->
+                    <Border Background="White" CornerRadius="12" Padding="20" Margin="0,20,0,0"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="Характеристики" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,12" />
+                            <Grid x:Name="FeaturesGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Описание -->
+                    <Border x:Name="DescriptionBorder" Background="White" CornerRadius="12"
+                            Padding="20" Margin="0,16,0,0"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                            Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Описание" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,8" />
+                            <TextBlock x:Name="DescriptionText" FontSize="14"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Загрузка -->
+        <TextBlock x:Name="LoadingText" Grid.Row="1" Text="Загрузка..."
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="16" Foreground="{StaticResource TextSecondaryBrush}" />
+    </Grid>
+</Window>
